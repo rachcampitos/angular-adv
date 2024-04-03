@@ -56,15 +56,17 @@ export class PerfilComponent implements OnInit {
 
     reader.onloadend = () => {
       this.imgTemp = reader.result;
-      console.log(reader.result);
     };
   }
   uploadImg() {
     this.uploadService
-      .updatePhoto(this.imgUpload, 'usuarios', this.usuario.uid)
+      .updatePhoto(this.imgUpload, 'usuarios', this.usuario._id)
       .then((img) => {
         Swal.fire('Guardado', 'La imagen ha sido guardada', 'success');
         this.usuario.img = img;
+      })
+      .catch((err) => {
+        Swal.fire('Error', 'No se pudo subir la imagen', 'error');
       });
   }
 }
