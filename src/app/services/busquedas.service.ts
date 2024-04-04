@@ -4,6 +4,8 @@ import { CargarUsuario } from '../interfaces/cargar-usuarios.interface';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Usuario } from '../models/usuario.model';
+import { Hospital } from '../models/hospital.model';
+import { Medico } from '../models/medico.model';
 
 const base_url = environment.base_url;
 
@@ -40,6 +42,14 @@ export class BusquedasService {
     );
   }
 
+  private transformHospitales(resultados: any[]): Hospital[] {
+    return resultados;
+  }
+
+  private transformMedicos(resultados: any[]): Medico[] {
+    return resultados;
+  }
+
   buscar(tipo: 'usuarios' | 'medicos' | 'hospitales', termino: string) {
     return this.http
       .get<any[]>(`${base_url}/todo/coleccion/${tipo}/${termino}`, this.headers)
@@ -48,6 +58,10 @@ export class BusquedasService {
           switch (tipo) {
             case 'usuarios':
               return this.transformUsers(res.resultados);
+            case 'hospitales':
+              return this.transformHospitales(res.resultados);
+            case 'medicos':
+              return this.transformMedicos(res.resultados);
             default:
               return [];
           }
