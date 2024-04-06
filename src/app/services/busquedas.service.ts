@@ -50,6 +50,10 @@ export class BusquedasService {
     return resultados;
   }
 
+  busquedaGlobal(termino: string) {
+    return this.http.get<any[]>(`${base_url}/todo/${termino}`, this.headers);
+  }
+
   buscar(tipo: 'usuarios' | 'medicos' | 'hospitales', termino: string) {
     return this.http
       .get<any[]>(`${base_url}/todo/coleccion/${tipo}/${termino}`, this.headers)
