@@ -42,7 +42,6 @@ export class MedicosComponent implements OnInit, OnDestroy {
       this.medicos = medicos;
       this.medicosTemp = medicos;
       this.loading = false;
-      console.log(medicos);
     });
   }
   abrirModal(medico: Medico) {
